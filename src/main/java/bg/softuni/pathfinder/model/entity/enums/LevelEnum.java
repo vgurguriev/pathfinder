@@ -1,6 +1,6 @@
 package bg.softuni.pathfinder.model.entity.enums;
 
-public enum UserLevel {
+public enum LevelEnum {
     BEGINNER,
     INTERMEDIATE,
     ADVANCED

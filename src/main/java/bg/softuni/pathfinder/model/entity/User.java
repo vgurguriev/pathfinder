@@ -1,7 +1,6 @@
 package bg.softuni.pathfinder.model.entity;
 
-import bg.softuni.pathfinder.model.entity.Role;
-import bg.softuni.pathfinder.model.entity.enums.UserLevel;
+import bg.softuni.pathfinder.model.entity.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,7 +16,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(name = "fullname")
+    @Column(name = "full_name")
     private String fullName;
 
     private int age;
@@ -25,13 +24,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    private UserLevel level;
+    @Enumerated(EnumType.STRING)
+    private LevelEnum level;
 
     public Long getId() {
         return id;
@@ -73,11 +73,11 @@ public class User {
         this.roles = roles;
     }
 
-    public UserLevel getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public void setLevel(UserLevel level) {
+    public void setLevel(LevelEnum level) {
         this.level = level;
     }
 }
