@@ -33,6 +33,19 @@ public class User {
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
 
+    public User() {
+
+    }
+
+    public User(String username, String fullName, int age, String password, String email) {
+        this();
+        this.username = username;
+        this.fullName = fullName;
+        this.age = age;
+        this.password = password;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }
