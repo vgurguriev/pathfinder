@@ -16,17 +16,16 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(name = "full_name")
-    private String fullName;
-
-    private int age;
-
     @Column(nullable = false)
     private String password;
 
     @Column(unique = true)
     private String email;
 
+    @Column(name = "full_name")
+    private String fullName;
+
+    private int age;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
@@ -36,14 +35,14 @@ public class User {
     public User() {
 
     }
-
-    public User(String username, String fullName, int age, String password, String email) {
+    public User(String username, String password, String email, String fullName, int age) {
         this();
+
         this.username = username;
-        this.fullName = fullName;
-        this.age = age;
         this.password = password;
         this.email = email;
+        this.fullName = fullName;
+        this.age = age;
     }
 
     public Long getId() {
@@ -92,5 +91,23 @@ public class User {
 
     public void setLevel(LevelEnum level) {
         this.level = level;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public User setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public User setAge(int age) {
+        this.age = age;
+        return this;
     }
 }

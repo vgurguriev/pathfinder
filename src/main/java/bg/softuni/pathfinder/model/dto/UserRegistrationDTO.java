@@ -1,6 +1,4 @@
 package bg.softuni.pathfinder.model.dto;
-
-
 import javax.validation.constraints.*;
 
 public class UserRegistrationDTO {
