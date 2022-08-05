@@ -108,6 +108,15 @@ public class Route {
         return pictures;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Route setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     public void setPictures(Set<Picture> pictures) {
         this.pictures = pictures;
     }

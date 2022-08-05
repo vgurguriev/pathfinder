@@ -6,6 +6,9 @@
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
+<!-- Navigation -->
+<th:block th:include="~{/fragments/header}"/>
+
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="border-bottom mb-5">Login</h1>
     <div class="d-flex justify-content-center">
@@ -48,12 +51,7 @@
 
     </div>
 </main>
-<footer class="footer bg-blur rounded">
-    <div class="container-fluid text-center">
-        <div class="h5 text-white">
-            &copy; Lucho, Chocho & Spring Advanced Students 2021. All rights reserved.
-        </div>
-    </div>
-</footer>
+<!--Footer-->
+<th:block th:include="~{/fragments/footer}"/>
 </body>
 </html>
