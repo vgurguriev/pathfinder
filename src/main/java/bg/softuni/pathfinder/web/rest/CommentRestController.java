@@ -10,9 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class CommentRestController {
     private final CommentService commentService;
 
@@ -20,20 +21,24 @@ public class CommentRestController {
         this.commentService = commentService;
     }
 
-    @PostMapping(value = "/{routeId}/comments",
-            consumes = "/application/json",
-            produces = "/application/json")
+    @GetMapping("/{routeId}/comments")
+    public ResponseEntity<List<CommentDisplayView>> getComments(
+            @PathVariable("routeId") Long routeId) {
+
+        return ResponseEntity.ok(commentService.getAllCommentsForRoute(routeId));
+    }
+
+    @PostMapping(value = "/{routeId}/comments", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CommentDisplayView> createComment(@PathVariable("routeId") Long routeId,
                                                             @AuthenticationPrincipal UserDetails userDetails,
-                                                            @RequestBody CommentMessageDTO commentDTO) {
-
-        CommentCreationDTO commentCreationDTO = new CommentCreationDTO(
+                                                            @RequestBody CommentMessageDTO commentDto) {
+        CommentCreationDTO commentCreationDto = new CommentCreationDTO(
                 userDetails.getUsername(),
                 routeId,
-                commentDTO.getMessage()
+                commentDto.getMessage()
         );
 
-        CommentDisplayView comment = commentService.createComment(commentCreationDTO);
+        CommentDisplayView comment = commentService.createComment(commentCreationDto);
 
         return ResponseEntity
                 .created(URI.create(String.format("/api/%d/comments/%d", routeId, comment.getId())))
