@@ -1,5 +1,6 @@
 package bg.softuni.pathfinder.web.rest;
 
+import bg.softuni.pathfinder.exceptions.RouteNotFoundException;
 import bg.softuni.pathfinder.model.dto.CommentCreationDTO;
 import bg.softuni.pathfinder.model.dto.CommentMessageDTO;
 import bg.softuni.pathfinder.model.views.CommentDisplayView;
@@ -44,4 +45,43 @@ public class CommentRestController {
                 .created(URI.create(String.format("/api/%d/comments/%d", routeId, comment.getId())))
                 .body(comment);
     }
+
+    @ExceptionHandler({RouteNotFoundException.class})
+    public ResponseEntity<ErrorApiResponse> handleRouteNotFound() {
+        return ResponseEntity.status(404).body(new ErrorApiResponse(
+                "Such route doesnt exist", 1004));
+    }
 }
+
+class ErrorApiResponse {
+    private String message;
+    private Integer errorCode;
+
+    public ErrorApiResponse(String message, Integer errorCode) {
+        this.message = message;
+        this.errorCode = errorCode;
+    }
+
+    public ErrorApiResponse() {
+
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ErrorApiResponse setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public ErrorApiResponse setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+        return this;
+    }
+}
+
