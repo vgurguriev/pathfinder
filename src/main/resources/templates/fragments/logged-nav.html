@@ -2,6 +2,9 @@
     <nav class="main-nav">
         <ul>
             <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
                 <a href="/">Add new route</a>
             </li>
             <li>
@@ -9,6 +12,9 @@
             </li>
             <li sec:authorize="hasRole('ADMIN')">
                 <a href="/">Admin</a>
+            </li>
+            <li>
+                <a href="/">About</a>
             </li>
             <li>
                 <form th:action="@{/users/logout}" th:method="post">

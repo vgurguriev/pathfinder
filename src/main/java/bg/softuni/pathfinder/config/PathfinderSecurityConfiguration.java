@@ -41,7 +41,6 @@ public class PathfinderSecurityConfiguration {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/");
 
-
         return http.build();
     }
 
